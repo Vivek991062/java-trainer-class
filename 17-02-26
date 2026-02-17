@@ -1,0 +1,66 @@
+
+#160 intersection of two linked list
+
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode A=headA;
+        ListNode B=headB;
+
+        while(A!=B){
+            A=(A==null)? headB:A.next;
+            B=(B==null)? headA:B.next;
+        }
+        return A;
+    }
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# 19. Remove Nth Node From End of List
+
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy=new ListNode(-1);
+        dummy.next=head;
+        ListNode ptr1=dummy;
+        ListNode ptr2=dummy;
+
+        for(int i=0;i<n;i++){
+            ptr2=ptr2.next;
+        }
+        while(ptr2.next!=null){
+            ptr1=ptr1.next;
+            ptr2=ptr2.next;
+        }
+        ptr1.next=ptr1.next.next;
+        return dummy.next;
+    }
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+92. Reverse Linked List II
+
+class Solution {
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+
+        ListNode leftPre = dummy;
+        ListNode curr = head;
+
+        for(int i = 0; i < left - 1; i++) {
+            leftPre = leftPre.next;
+            curr = curr.next;
+        }
+        ListNode subListHead = curr;
+        ListNode prev = null;
+
+        for(int i = 0; i <= right - left; i++) {
+            ListNode next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        leftPre.next = prev;
+        subListHead.next = curr;
+
+        return dummy.next;
+    }
+}
