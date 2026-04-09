@@ -16,3 +16,61 @@ class Solution {
         
     }
 }
+---------------------------------------------------------------------
+#94. Binary Tree Inorder Traversal
+class Solution {
+    public void traversal(TreeNode root,List<Integer> ans){
+        if(root==null){
+            return;
+        }
+        
+        traversal(root.left,ans);
+        ans.add(root.val);
+        traversal(root.right,ans);
+    }
+    public List<Integer> inorderTraversal(TreeNode root) {
+        ArrayList<Integer> ans=new ArrayList<>();
+        traversal(root,ans);
+        return ans;
+        
+    }
+
+}
+---------------------------------------------------------------------
+#145. Binary Tree Postorder Traversal
+class Solution {
+    public void traversal(TreeNode root,List<Integer> ans){
+        if(root==null){
+            return;
+        }
+        traversal(root.left,ans);
+        traversal(root.right,ans);
+        ans.add(root.val);
+        
+        
+    }
+    public List<Integer> postorderTraversal(TreeNode root) {
+        ArrayList<Integer> ans=new ArrayList<>();
+        traversal(root,ans);
+        return ans;
+        
+    }
+}
+
+---------------------------------------------------------------------------------
+#104. Maximum Depth of Binary Tree
+
+class Solution {
+    public int maxDepth(TreeNode root) {
+        if(root==null){
+            return 0;
+        }
+        int leftHeight=maxDepth(root.left);
+        int rightHeight=maxDepth(root.right);
+
+        int maxHeight= Math.max(leftHeight,rightHeight)+1;
+        return maxHeight;
+
+        
+    }
+}
