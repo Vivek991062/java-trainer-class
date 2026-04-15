@@ -8,3 +8,32 @@ class Solution {
         return 2*(1+n/2-lastRemaining(n/2) );
     }
 }
+------------------------------------------------------------------------------------------------------------
+#3483. Unique 3-Digit Even Numbers
+class Solution {
+    public int totalNumbers(int[] digits) {
+        int[] freq = new int[10];
+
+        // count digits
+        for (int d : digits) {
+            freq[d]++;
+        }
+
+        int count = 0;
+
+        // check all 3-digit even numbers
+        for (int num = 100; num <= 999; num += 2) {
+            int a = num / 100;
+            int b = (num / 10) % 10;
+            int c = num % 10;
+
+            int[] temp = freq.clone();
+
+            if (temp[a]-- > 0 && temp[b]-- > 0 && temp[c]-- > 0) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+}
