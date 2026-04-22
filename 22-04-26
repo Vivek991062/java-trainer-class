@@ -1,0 +1,43 @@
+#1373. Maximum Sum BST in Binary Tree
+
+class Solution {
+    int maxSum=0;
+    public int[] traversal(TreeNode root){
+        if(root==null){
+        return new int[]{0,Integer.MAX_VALUE, Integer.MIN_VALUE,1};
+       }
+       int[] left=traversal(root.left);
+       int[] right=traversal(root.right);
+
+       if(left[3]==1 && right[3]==1 && left[2]<root.val && right[1]>root.val){
+        int sum = root.val + right[0]+ left[0];
+        maxSum=Math.max(maxSum,sum);
+        return new int[] {sum,Math.min(left[1],root.val),Math.max(right[2],root.val),1};
+       }
+       return new int[]{0,Integer.MIN_VALUE,Integer.MAX_VALUE,0};
+    }
+    public int maxSumBST(TreeNode root) {
+       
+       traversal(root);
+       return maxSum;
+        
+
+    }
+}
+
+------------------------------------------------------------------------------------------------------------------------
+111. Minimum Depth of Binary Tree
+
+class Solution {
+    public int minDepth(TreeNode root) {
+        if(root==null){
+            return 0;
+        }
+        int leftHeight=minDepth(root.left);
+        int rightHeight=minDepth(root.right);
+        if(Math.min(leftHeight,rightHeight)==0){
+            return Math.max(leftHeight,rightHeight)+1;
+        }
+        return Math.min(leftHeight,rightHeight)+1;
+    }
+}
